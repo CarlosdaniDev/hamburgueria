@@ -1,14 +1,19 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Alemão Burger | Cardápio Digital</title>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@300;400;600;700&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         :root {
             --primary: #f39200;
@@ -51,7 +56,7 @@
         }
 
         .hero {
-            height: 50vh;
+            height: 60vh;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1000');
             background-size: cover;
             background-position: center;
@@ -211,227 +216,422 @@
             margin-top: 10px;
         }
 
+
+
         /* FOOTER ESTILIZADO */
+
         footer {
+
             background: #000;
+
             padding: 40px 5% 140px;
             /* Espaço extra no fundo para não cobrir o carrinho */
+
             border-top: 2px solid var(--primary);
+
             text-align: center;
+
             margin-top: 50px;
+
         }
+
+
 
         .footer-content {
+
             max-width: 1200px;
+
             margin: 0 auto;
+
             display: grid;
+
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
             gap: 30px;
+
             text-align: center;
+
         }
+
+
 
         .footer-box h3 {
+
             font-family: 'Oswald', sans-serif;
+
             color: var(--primary);
+
             margin-bottom: 15px;
+
             text-transform: uppercase;
+
         }
+
+
 
         .footer-box p {
+
             font-size: 0.9rem;
+
             color: var(--text-gray);
+
             line-height: 1.6;
+
         }
+
+
 
         .social-links {
+
             margin-top: 20px;
+
         }
+
+
 
         .social-links a {
+
             color: var(--white);
+
             font-size: 1.5rem;
+
             margin: 0 10px;
+
             transition: 0.3s;
+
         }
+
+
 
         .social-links a:hover {
+
             color: var(--primary);
+
         }
 
+
+
         .copyright {
+
             margin-top: 40px;
+
             padding-top: 20px;
+
             border-top: 1px solid #222;
+
             font-size: 0.7rem;
+
             color: #555;
+
         }
     </style>
+
 </head>
 
 <body>
+
     <header>
         <div class="logo-text">ALEMÃO BURGER</div>
     </header>
+
     <section class="hero">
         <h1 style="font-family: Oswald; color: var(--primary); font-size: 2rem;">PEDIDO ONLINE</h1>
     </section>
+
     <div class="container" id="cardapio-geral"></div>
+
     <div id="checkoutModal">
+
         <div class="modal-content">
+
             <h3 style="font-family: Oswald; color: var(--primary); margin-bottom: 15px;">FINALIZAR PEDIDO</h3>
+
             <div class="form-group"><label>Seu Nome</label><input type="text" id="nome"></div>
+
             <div class="form-group"><label>Como quer receber?</label><select id="metodoEntrega"
                     onchange="atualizarTotal()">
                     <option value="entrega">Entrega (+ R$ 5,00)</option>
                     <option value="buscar">Vou buscar no Alemão</option>
                 </select></div>
+
             <div class="form-group" id="campoEndereco"><label>Endereço Completo</label><input type="text" id="endereco">
             </div>
+
             <div class="form-group"><label>Forma de Pagamento</label><select id="pagamento" onchange="toggleTroco()">
                     <option value="Pix">Pix</option>
                     <option value="Cartão">Cartão</option>
                     <option value="Dinheiro">Dinheiro</option>
                 </select></div>
+
             <div class="form-group" id="trocoGroup" style="display:none;"><label>Troco para quanto?</label><input
                     type="text" id="troco"></div>
+
             <div class="form-group"><label>Observações</label><textarea id="obs" rows="2"
                     placeholder="Sem cebola, tirar abacaxi..."></textarea></div>
+
             <div style="padding:10px; background:#111; border-radius:8px; margin:10px 0;">Total: <b id="totalComTaxa"
                     style="color:var(--primary); float:right;">R$ 0,00</b></div>
+
             <button class="finish-btn" onclick="enviarZap()">ENVIAR NO WHATSAPP</button>
+
             <button onclick="closeCheckout()"
                 style="background:none; border:none; color:white; width:100%; margin-top:10px; cursor:pointer;">Voltar</button>
+
         </div>
+
     </div>
+
     <div class="cart-bar" id="cartBar">
         <div>Total: <b id="cartTotal">R$ 0,00</b></div><button class="finish-btn" style="width:auto;"
             onclick="openCheckout()">Finalizar</button>
-        </div>
     </div>
+
+
+
     <footer>
+
         <div class="footer-content">
+
             <div class="footer-box">
+
                 <h3>Alemão Burger</h3>
+
                 <p>O melhor sabor bruto da região. Ingredientes selecionados e chapa quente todos os dias!</p>
+
                 <div class="social-links">
+
                     <a href="#"><i class="fab fa-instagram"></i></a>
+
                     <a href="#"><i class="fab fa-facebook"></i></a>
+
                 </div>
+
             </div>
 
+
+
             <div class="footer-box">
+
                 <h3>Funcionamento</h3>
+
                 <p><i class="far fa-clock"></i> Terça a Domingo</p>
+
                 <p>Das 18:00 às 23:30</p>
+
                 <p style="color: var(--primary); margin-top: 5px;">Segunda: Fechado</p>
+
             </div>
 
+
+
             <div class="footer-box">
+
                 <h3>Onde estamos</h3>
+
                 <p><i class="fas fa-map-marker-alt"></i> Rua Principal, 123</p>
+
                 <p>Bairro Centro - Sua Cidade/UF</p>
+
                 <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+
             </div>
+
         </div>
+
+
 
         <div class="copyright">
+
             &copy; 2026 Alemão Burger - Todos os direitos reservados.
+
         </div>
+
     </footer>
 
-
     <script>
+
         const cardapio = {
+
             "Bovinos": [
+
                 { n: 1, t: "Hambúrguer", p: 15, d: "Pão, hambúrguer de boi, maionese, tomate, alface, batata palha." },
+
                 { n: 2, t: "X Burguer Salada", p: 16, d: "Pão, queijo, hambúrguer, maionese, tomate, alface, batata palha." },
+
                 { n: 3, t: "X Bacon", p: 23, d: "Pão, bacon, queijo, hambúrguer, maionese, tomate, alface, palha." },
+
                 { n: 4, t: "X Egg Bacon", p: 24, d: "Pão, bacon, ovo, queijo, hambúrguer, maionese, tomate, alface." },
+
                 { n: 5, t: "X Burguer Especial", p: 20, d: "Pão, ovo, queijo, presunto, hambúrguer, maionese, tomate, alface." },
+
                 { n: 6, t: "Kanguru", p: 21, d: "Pão, 2 hambúrgueres de boi, 2 queijos, maionese, tomate, alface." },
+
                 { n: 7, t: "Laçador", p: 24, d: "Pão, hambúrguer, bacon, queijo, presunto, milho, maionese, tomate, alface." },
+
                 { n: 8, t: "Hawai", p: 20, d: "Pão, hambúrguer, queijo, presunto, milho, maionese, tomate, alface." },
+
                 { n: 9, t: "Havaneiro", p: 20, d: "Pão, hambúrguer, queijo, presunto, abacaxi, tomate, maionese, alface." }
+
             ],
+
             "Frango": [
+
                 { n: 10, t: "Framburguer", p: 20, d: "Pão, hamb. frango, queijo, presunto, maionese, tomate, alface, palha." },
+
                 { n: 11, t: "Framburguer Duplo", p: 22, d: "Pão, 2 hamb. frango, 2 queijos, maionese, tomate, alface." },
+
                 { n: 12, t: "Framburguer Especial", p: 24, d: "Pão, hamb. frango, bacon, queijo, ovo, maionese, tomate, alface." },
+
                 { n: 13, t: "X Frango", p: 21, d: "Pão, filé de frango, queijo, presunto, tomate, maionese, alface." },
+
                 { n: 14, t: "X Frango Especial", p: 22, d: "Pão, filé de frango, queijo, ovo, presunto, milho, maionese, tomate." },
+
                 { n: 15, t: "Frango Super", p: 25, d: "Pão, filé de frango, queijo, bacon, presunto, maionese, milho, tomate." },
+
                 { n: 16, t: "Frango Duplo", p: 24, d: "Pão, 2 filés de frango, 2 queijos, maionese, tomate, alface, palha." }
+
             ],
+
             "Lombo e Especiais": [
+
                 { n: 17, t: "X Lombo", p: 22, d: "Pão, lombo, queijo, presunto, maionese, tomate, alface, batata palha." },
+
                 { n: 18, t: "X Lombo Especial", p: 24, d: "Pão, lombo, queijo, presunto, ovo, maionese, milho, tomate, alface." },
+
                 { n: 19, t: "X Lombo Super", p: 26, d: "Pão, lombo, queijo, presunto, bacon, milho, maionese, tomate, alface." },
+
                 { n: 20, t: "X Tudo", p: 26, d: "Pão, hambúrguer boi, ovo, milho, bacon, queijo, presunto, abacaxi, tomate, alface." },
+
                 { n: 21, t: "Big Alemão", p: 28, d: "Pão, bacon, ovo, queijo, presunto, frango, abacaxi, milho, tomate, alface." },
+
                 { n: 22, t: "Vegetariano", p: 18, d: "Pão, ovo, queijo, abacaxi, milho, alface, tomate e batata palha." },
+
                 { n: 23, t: "Misto Quente", p: 13, d: "Pão de hambúrguer, 2 fatias de queijo, 2 fatias de presunto." }
+
             ],
+
             "Picanha": [
+
                 { n: 24, t: "X Picanha", p: 21, d: "Pão, hambúrguer de picanha, presunto, queijo, maionese, tomate, alface." },
+
                 { n: 25, t: "X Picanha Duplo", p: 24, d: "Pão, 2 hamb. picanha, 2 queijos, 2 presuntos, maionese, tomate." },
+
                 { n: 26, t: "Picanha Cheddar", p: 26, d: "Pão, hamb. picanha, bacon, presunto, cheddar, maionese, tomate, alface." },
+
                 { n: 27, t: "Picanha Catupiry", p: 26, d: "Pão, hamb. picanha, queijo, presunto, bacon, catupiry, tomate, alface." },
+
                 { n: 28, t: "Tri Legal", p: 26, d: "Pão, 3 hambúrgueres de picanha, 3 queijos, maionese, tomate, alface." },
+
                 { n: 29, t: "Big Monstro", p: 38, d: "Pão, 2 picanhas, 2 bacons, 2 queijos, 2 presuntos, 2 ovos, milho, tomate, alface, palha." }
+
             ],
+
             "Bebidas": [
+
                 { t: "Coca-Cola 2L", p: 17, d: "Gelada" }, { t: "Mate Couro 2L", p: 12, d: "Gelada" }, { t: "Coca 1L", p: 10, d: "Gelada" }, { t: "Refri Lata", p: 6, d: "350ml" }
+
             ]
+
         };
 
 
+
+
+
         let cart = []; let totalProd = 0;
+
         function render() {
+
             const container = document.getElementById('cardapio-geral');
+
             for (let cat in cardapio) {
+
                 let html = `<h2 class="section-title">${cat}</h2><div class="menu-category">`;
+
                 cardapio[cat].forEach(item => {
+
                     const nomeExibicao = item.n ? `${item.n} - ${item.t}` : item.t;
+
                     html += `<div class="menu-item"><div class="item-main"><h4>${nomeExibicao}</h4><p>${item.d}</p></div><div class="item-price">R$ ${item.p.toFixed(2)}</div><button class="add-btn" onclick="addToCart('${nomeExibicao}', ${item.p})">+</button></div>`;
+
                 });
+
                 container.innerHTML += html + `</div>`;
+
             }
+
         }
+
         function addToCart(name, price) { cart.push({ name, price }); totalProd += price; document.getElementById('cartBar').classList.add('active'); document.getElementById('cartTotal').innerText = `R$ ${totalProd.toFixed(2)}`; }
+
         function openCheckout() { document.getElementById('checkoutModal').style.display = 'flex'; atualizarTotal(); }
+
         function closeCheckout() { document.getElementById('checkoutModal').style.display = 'none'; }
+
         function toggleTroco() { document.getElementById('trocoGroup').style.display = (document.getElementById('pagamento').value === 'Dinheiro') ? 'block' : 'none'; }
+
         function atualizarTotal() {
+
             const taxa = (document.getElementById('metodoEntrega').value === 'entrega') ? 5 : 0;
+
             document.getElementById('campoEndereco').style.display = (taxa > 0) ? 'block' : 'none';
+
             document.getElementById('totalComTaxa').innerText = `R$ ${(totalProd + taxa).toFixed(2)}`;
+
         }
+
         function enviarZap() {
+
             const nome = document.getElementById('nome').value;
+
             const metodo = document.getElementById('metodoEntrega').value;
+
             const endereco = document.getElementById('endereco').value;
+
             const pagamento = document.getElementById('pagamento').value;
+
             const troco = document.getElementById('troco').value;
+
             const obs = document.getElementById('obs').value;
+
             if (!nome || (metodo === 'entrega' && !endereco)) return alert("Preencha os campos!");
+
             let taxa = metodo === 'entrega' ? 5 : 0;
+
             let msg = `🍔 *NOVO PEDIDO - ALEMÃO BURGER*\n\n*Cliente:* ${nome}\n*Método:* ${metodo === 'entrega' ? 'ENTREGA' : 'RETIRADA'}\n`;
+
             if (metodo === 'entrega') msg += `*Endereço:* ${endereco}\n`;
+
             msg += `*Pagamento:* ${pagamento}${troco ? ' (Troco p/ ' + troco + ')' : ''}\n`;
+
             if (obs) msg += `*Obs:* ${obs}\n`;
+
             msg += `\n*ITENS:*\n`;
 
+
+
             const resumo = cart.reduce((acc, i) => { acc[i.name] = (acc[i.name] || 0) + 1; return acc; }, {});
+
             for (let i in resumo) {
+
                 // LIMPEZA DO NÚMERO: Remove "1 - ", "2 - ", etc. apenas na mensagem
+
                 let nomeLimpo = i.replace(/^\d+\s-\s/, "");
+
                 msg += `• ${resumo[i]}x ${nomeLimpo}\n`;
+
             }
+
             msg += `\n*Total:* R$ ${(totalProd + taxa).toFixed(2)}`;
+
             window.open(`https://wa.me/5531995312787?text=${encodeURIComponent(msg)}`);
+
         }
+
         render();
+
     </script>
+
 </body>
 
 </html>
